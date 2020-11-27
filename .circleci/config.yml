@@ -1,5 +1,5 @@
 version: 2.1
-executor:
+executors:
   app-executor:
     docker:
       - image: circleci/node:13.12.0
@@ -10,21 +10,21 @@ aliases:
     run:
       name: Show current branch
       command: echo ${CIRCLE_BRANCH}
-  - &restore-cache:
+  - &restore-cache
     restore_cache:
       keys:
         - app-{{ checksum "package.json" }}
         - app-
-  - &install-dependencies:
+  - &install-dependencies
     run:
       name: Install dependencies
       command: npm install
-  - &save-cache:
+  - &save-cache
     save_cache:
       paths:
         - node_modules
       key: app-{{ checksum "package.json" }}
-  - &install-aws-cli:
+  - &install-aws-cli
     run:
       name: Installing AWS CLI
       working_directory: /
@@ -32,7 +32,7 @@ aliases:
         sudo apt-get -y -qq update
         sudo apt-get install -y awscli
         sudo apt-get install -y python-pip python-dev build-essential
-  - &buid-project:
+  - &build-project
     run:
       name: Build Project
       command: |
@@ -41,7 +41,6 @@ aliases:
         cd build
         zip ../build.zip -r * .[^.]*
         echo "Build successful"
-
 jobs:
   build:
     executor: app-executor
@@ -61,6 +60,7 @@ jobs:
       - run:
           name: Run linting
           command: npm run lint
+
   deploy-to-aws-s3:
     executor: app-executor
     steps:
@@ -93,7 +93,7 @@ jobs:
             aws configure set preview.cloudfront true
             if [ "${CIRCLE_BRANCH}" == "master" ]
             then
-              aws cloudfront create-invalidation --distribution-id ${PROD_DISTRIBUTION_ID} --paths /\*
+              aws cloudfront create-invalidation --distribution-id ${PRODUCTION_DISTRIBUTION_ID} --paths /\*
             elif [ "${CIRCLE_BRANCH}" == "staging" ]
             then
               aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\*
