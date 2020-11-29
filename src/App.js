@@ -10,7 +10,6 @@ const App = () => {
       <Header />
       <div className="app">
         <Main />
-        <h1>Setup React Redux</h1>
       </div>
     </Provider>
   );

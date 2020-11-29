@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import './Slideshow.scss';
 
 const Slideshow = (props) => {
@@ -15,17 +16,25 @@ const Slideshow = (props) => {
   let currentSlideIndex = 0;
 
   useEffect(() => {
+    setState({
+      ...state,
+      slideIndex: 0,
+      slideShow: images[0]
+    });
     if (auto) {
       const timeInterval = setInterval(() => {
         autoMoveSlide();
       }, 5000);
       setSliderInterval(timeInterval);
+
       return () => {
         clearInterval(timeInterval);
         clearInterval(sliderInterval);
       };
     }
-  }, []);
+
+    // eslint-disable-next-line
+  }, [images]);
 
   const autoMoveSlide = () => {
     let lastIndex = 0;
@@ -33,8 +42,8 @@ const Slideshow = (props) => {
     currentSlideIndex = lastIndex >= images.length ? 0 : lastIndex;
     setState((prev) => ({
       ...prev,
-      slideShow: images[currentSlideIndex],
-      slideIndex: currentSlideIndex
+      slideIndex: currentSlideIndex,
+      slideShow: images[currentSlideIndex]
     }));
   };
 
@@ -47,7 +56,7 @@ const Slideshow = (props) => {
         index -= 1;
       }
     } else {
-      if (currentIndex <= images.length) {
+      if (currentIndex < images.length) {
         index += 1;
       }
       if (index === images.length) {
@@ -57,8 +66,8 @@ const Slideshow = (props) => {
     setCurrentIndex(index);
     setState((prev) => ({
       ...prev,
-      slideShow: images[index],
-      slideIndex: index
+      slideIndex: index,
+      slideShow: images[index]
     }));
   };
 
@@ -79,7 +88,6 @@ const Slideshow = (props) => {
       const btnClasses = i === currentSlide ? 'slider-navButton slider-navButton--active' : 'slider-navButton';
       return <button className={btnClasses} key={i} />;
     });
-
     return <div className="slider-nav">{listIndicators}</div>;
   };
 
@@ -87,9 +95,9 @@ const Slideshow = (props) => {
     <>
       <div className="slider">
         <div className="slider-slides">{images && images.length && slideShow && <div className="slider-image" style={{ backgroundImage: `url(${slideShow.url})` }}></div>}</div>
+        <Indicators currentSlide={slideIndex} />
+        {showArrows ? <RenderArrows /> : null}
       </div>
-      <Indicators currentSlide={slideIndex} />
-      {showArrows ? <RenderArrows /> : ''}
     </>
   );
 };
