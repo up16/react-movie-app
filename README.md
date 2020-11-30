@@ -1,10 +1,10 @@
 React app built with Redux and utilizing [The Movie Database Api](https://developers.themoviedb.org/3/getting-started/introduction). The app is deployed using CircleCI CI/CD pipelines to AWS and distreibuted with AWS cloudfront.
 
 # For contribution follow:
-[Development Link](dxn5d6at8t7pl.cloudfront.net)
-[Staging Link](d3n18d2h3yrzto.cloudfront.net)
-[Production Link](d2pvbf0t9xl5v2.cloudfront.net)
-[Slack:](https://join.slack.com/t/circleci-devlogs/shared_invite/zt-jdprkpef-GLoBNrm54Mpc0zA19GEnVg):CircleCI Builds and General Discussion
+1. [Development Link](dxn5d6at8t7pl.cloudfront.net)
+2. [Staging Link](d3n18d2h3yrzto.cloudfront.net)
+3. [Production Link](d2pvbf0t9xl5v2.cloudfront.net)
+4. [Slack](https://join.slack.com/t/circleci-devlogs/shared_invite/zt-jdprkpef-GLoBNrm54Mpc0zA19GEnVg):CircleCI Builds and General Discussion
 
 # App Usage locally
 1. Clone the Repo
