@@ -1,4 +1,4 @@
-React app built with Redux and utilizing [The Movie Database Api](https://developers.themoviedb.org/3/getting-started/introduction). The app is deployed using CircleCI CI/CD pipelines to AWS and distreibuted with AWS cloudfront.
+React app built with Redux and utilizing [The Movie Database Api](https://developers.themoviedb.org/3/getting-started/introduction). The app is deployed using CircleCI CI/CD pipelines to AWS and distributed with AWS cloudfront.
 
 # For contribution follow:
 1. [Development Link](https://dxn5d6at8t7pl.cloudfront.net)
